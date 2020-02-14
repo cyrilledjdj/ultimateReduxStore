@@ -1,0 +1,14 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "5.2.1",
+    "typescript": "3.7.5",
+    "webpack": "4.41.6",
+    "webpack-dev-server": "3.10.3"
+  }
+}

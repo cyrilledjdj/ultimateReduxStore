@@ -102,3 +102,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Random
+_site
+.git
+.sass-cache
+.jekyll-metadata
+.DS_Store
+.idea
