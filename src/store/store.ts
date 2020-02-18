@@ -10,8 +10,21 @@ export class Store {
 		return this.state;
 	}
 
+	public subscribe(fn: Function) {
+		this.subscribers = [ ...(this.subscribers || []), fn ];
+		this.notify();
+		return () => {
+			this.subscribers = this.subscribers.filter((sub) => sub !== fn);
+		};
+	}
+
 	public dispatch(action) {
 		this.state = this.reduce(this.state, action);
+		this.notify();
+	}
+
+	private notify() {
+		this.subscribers.forEach((fn) => fn(this.value));
 	}
 
 	private reduce(state, action): { [key: string]: any } {

@@ -6,14 +6,9 @@ const button = document.querySelector('button') as HTMLButtonElement;
 const destroy = document.querySelector('.unsubscribe') as HTMLButtonElement;
 const todoList = document.querySelector('.todos') as HTMLLIElement;
 
-const store = new Store(
-	{
-		todos: reducer
-	},
-	{ todos: { data: [ { label: 'Push code', completed: false } ] } }
-);
-
-console.log(store.value);
+const store = new Store({
+	todos: reducer
+});
 
 button.addEventListener(
 	'click',
@@ -27,12 +22,14 @@ button.addEventListener(
 			payload
 		});
 
-		console.log(store.value);
 		input.value = '';
-		renderTodos(store.value.todos.data);
 	},
 	false
 );
+
+const unsubscribe = store.subscribe((state) => renderTodos(state.todos.data));
+
+destroy.addEventListener('click', unsubscribe, false);
 
 todoList.addEventListener('click', function(event) {
 	const target = event.target as HTMLButtonElement;
@@ -41,4 +38,4 @@ todoList.addEventListener('click', function(event) {
 	}
 });
 
-renderTodos(store.value.todos.data);
+store.subscribe((state) => console.log('STATE:::', state));
